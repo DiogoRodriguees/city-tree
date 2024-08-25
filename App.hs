@@ -12,13 +12,19 @@ executeBuscarPeloNome arvoreQuadrupla = do
     nomeCidade <- getLine
     putStrLn "Digite o raio de distancia da cidade: "
     raio <- getLine
+
     case buscarCidadePeloNome nomeCidade arvoreQuadrupla of
         Just (lat, lon) -> do
-            let distancia = read raio :: Double
+            let distancia = read raio :: Double -- Casting do raio de String para Double
             case buscarCidadesProximas distancia (lat,  lon) arvoreQuadrupla of
                 [] -> putStrLn "Cidade não encontrada."
                 cidadesEncontradas -> do
+                    -- show() mostra a distancia como String
                     putStrLn $ "Cidades dentro de " ++ show distancia ++ " km de " ++ nomeCidade ++ ":"
+                    
+                    -- Map(callBack, lista) aplica a função entre () para a lista de cidadesEncontradas
+                    -- "\" define que sera passado os parametros da função
+                    -- "->" indica o inicio da função 
                     mapM_ (\cidade -> putStrLn $ " - " ++ cidade) cidadesEncontradas
 
         Nothing -> putStrLn "Cidade não encontrada."
@@ -31,14 +37,18 @@ executeInserirCidade arvoreQuadrupla = do
     latStr <- getLine
     putStrLn "Digite a longitude: "
     lonStr <- getLine
-    let latitude = read latStr :: Double
-    let longitude = read lonStr :: Double
+
+    let latitude = read latStr :: Double -- Casting da latStr de String para Double
+    let longitude = read lonStr :: Double -- Casting da lonStr de String para Double
     let arvoreAtualizada = inserirCidade nome latitude longitude arvoreQuadrupla
+    
     putStrLn "Cidade inserida com sucesso!"
+    -- retornando arvoreAtualizada como IO
     return arvoreAtualizada
 
 executeBuscarCidadesProximas :: ArvoreQuadrupla -> IO ()
 executeBuscarCidadesProximas arvoreQuadrupla = do
+    -- Lendo os parametros
     putStrLn "Digite a latitude da cidade: "
     latitude <- getLine
     putStrLn "Digite a longitudde da cidade: "
@@ -46,15 +56,22 @@ executeBuscarCidadesProximas arvoreQuadrupla = do
     putStrLn "Digite a distância (em km): "
     distStr <- getLine
 
-    let distancia = read distStr :: Double
-    case buscarCidadesProximas distancia (read latitude::Double, read longitude :: Double) arvoreQuadrupla of
+    let distancia = read distStr :: Double -- Casting da distancia de String para Double
+    let lat = read latitude::Double -- Casting da latitude de String para Double
+    let lon = read longitude::Double -- Casting da longitude de String para Double
+
+    case buscarCidadesProximas distancia (lat, lon) arvoreQuadrupla of
         [] -> putStrLn "Cidade não encontrada."
         cidadesEncontradas -> do
+            -- show() mostra a distancia como String
             putStrLn $ "Cidades dentro de " ++ show distancia ++ " km " ++ ":"
+            -- Map(callBack, lista) aplica a função entre () para a lista de cidadesEncontradas
+            -- "\" define que sera passado os parametros da função
+            -- "->" indica o inicio da função 
             mapM_ (\cidade -> putStrLn $ " - " ++ cidade) cidadesEncontradas
 
 
-
+-- Função pra para o loop run()
 sair :: IO ()
 sair = do error "Saindo ..."
 
@@ -70,8 +87,8 @@ mostrarMenu = do
 
 run :: ArvoreQuadrupla -> IO ()
 run arvoreQuadrupla = do
-    mostrarMenu
-    opcao <- getLine -- leitura da opção do menu (Teclado)
+    mostrarMenu -- exibindo menu de opções do sistema
+    opcao <- getLine -- lendo opção do menu (Teclado)
 
     case opcao of
         "1" -> do
