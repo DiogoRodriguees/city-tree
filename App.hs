@@ -4,7 +4,7 @@ import Control.Monad (forever, when, mapM_)
 import ArvoreQuadrupla
 
 mostraArvore:: ArvoreQuadrupla -> IO ()
-mostraArvore arvoreQuadrupla = do print arvoreQuadrupla 
+mostraArvore arvoreQuadrupla = do imprimirArvore arvoreQuadrupla 
 
 executeBuscarPeloNome :: ArvoreQuadrupla -> IO ()
 executeBuscarPeloNome arvoreQuadrupla = do
@@ -74,6 +74,14 @@ executeBuscarCidadesProximas arvoreQuadrupla = do
 -- Função pra para o loop run()
 sair :: IO ()
 sair = do error "Saindo ..."
+
+-- printArvore:: ArvoreQuadrupla -> IO ()
+-- printArvore (Node nomeCidade lat lon no ne so se) = do
+--     case no of
+--         Empty -> putStrLn $ "NO: Empty"
+--         (Node nomeCidade lat lon no ne so se) -> do 
+--             putStrLn $ "NO: " ++ nomeCidade
+--             printArvore ()
 
 mostrarMenu :: IO ()
 mostrarMenu = do 

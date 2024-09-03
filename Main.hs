@@ -1,13 +1,29 @@
 import Control.Monad (forever, when, mapM_)
 import ArvoreQuadrupla
+import System.IO
 import App
 
 main :: IO ()
 main = do
-    -- ("Louisville", 38.2527, -85.7585),
-    -- ("Washington", 38.9072, -77.0369),
-    -- ("Pittsburgh", 40.4406, -79.9959),
-    -- ("New York", 40.7128, -74.0060)
+    -- Curitiba
+    --     Latitude: -25.4284
+    --     Longitude: -49.2733
+
+    -- Londrina
+    --     Latitude: -23.3045
+    --     Longitude: -51.1696
+
+    -- Maringa
+    --     Latitude: -23.4208
+    --     Longitude: -51.9333
+
+    -- Cascavel
+    --     Latitude: -24.9555
+    --     Longitude: -53.4552
+
+    -- Ponta Grossa
+    --     Latitude: -25.0916
+    --     Longitude: -50.1666
     
     -- Criando a arvore base da aplicação: inciando ela vazia
     let arvoreQuadrupla = Empty
